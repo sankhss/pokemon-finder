@@ -49,7 +49,7 @@ class NameInsertionViewController: UIViewController, UITextFieldDelegate {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     segue.destination.modalPresentationStyle = .fullScreen
-    //dismiss(animated: true, completion: nil)
+    (segue.destination as! FavoriteTypeViewController).trainerName = nameInputTextField.text
   }
 
 }

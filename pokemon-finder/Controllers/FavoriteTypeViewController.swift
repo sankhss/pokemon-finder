@@ -10,11 +10,18 @@ import UIKit
 class FavoriteTypeViewController: UIViewController {
   
   @IBOutlet weak var typeInputTextField: UITextField!
+  @IBOutlet weak var greetingLabel: UILabel!
+  
+  var trainerName: String?
   
   var favoriteType: Type?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if let name = trainerName {
+      greetingLabel.text = "Hello, \(name)!"
+    }
     
     typeInputTextField.isUnderlinedField()
   }
@@ -33,6 +40,7 @@ class FavoriteTypeViewController: UIViewController {
   }
   
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    segue.destination.modalPresentationStyle = .fullScreen
    // Get the new view controller using segue.destination.
    // Pass the selected object to the new view controller.
    }

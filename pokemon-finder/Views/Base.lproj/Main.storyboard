@@ -214,14 +214,14 @@
                                                                     <rect key="frame" x="20" y="0.0" width="364" height="70"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2Y-B4-zCX">
-                                                                            <rect key="frame" x="0.0" y="15" width="260" height="40"/>
+                                                                            <rect key="frame" x="0.0" y="15" width="260.5" height="40"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="40" id="hbj-m5-kBs"/>
                                                                                 <constraint firstAttribute="width" constant="40" id="z03-3y-SDe"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTw-f5-SPn">
-                                                                            <rect key="frame" x="280" y="25" width="24" height="20.5"/>
+                                                                            <rect key="frame" x="280.5" y="25" width="23.5" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -402,6 +402,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="b6g-OY-1yY"/>
                     <connections>
+                        <outlet property="greetingLabel" destination="RYE-88-CqI" id="fPU-AM-0fC"/>
                         <outlet property="typeInputTextField" destination="ALv-C3-MzT" id="Mk3-Vc-1F4"/>
                         <segue destination="rNY-Q6-kky" kind="presentation" identifier="presentTypesModal" id="omG-sg-l87"/>
                         <segue destination="9aT-4q-WWR" kind="show" identifier="showPokemonList" id="jh1-TG-Qzn"/>
