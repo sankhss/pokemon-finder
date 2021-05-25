@@ -8,22 +8,33 @@
 import UIKit
 
 class FavoriteTypeViewController: UIViewController {
-
+  
   @IBOutlet weak var typeInputTextField: UITextField!
+  
+  var favoriteType: Type?
+  
   override func viewDidLoad() {
-        super.viewDidLoad()
-
+    super.viewDidLoad()
+    
     typeInputTextField.isUnderlinedField()
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  }
+  
+  @IBAction func selectTypeButtonPressed(_ sender: UIButton) {
+    performSegue(withIdentifier: "presentTypesModal", sender: self)
+  }
+  
+  func updateValue() {
+    typeInputTextField.text = favoriteType?.name?.capitalized
+  }
+  
+  @IBAction func submitButtonPressed(_ sender: UIButton) {
+    
+    performSegue(withIdentifier: "showPokemonList", sender: self)
+  }
+  
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   // Get the new view controller using segue.destination.
+   // Pass the selected object to the new view controller.
+   }
+  
 }

@@ -16,39 +16,43 @@ enum RequestMethod: String {
 }
 
 
-final class HttpClient {
+final class HttpClient<T: Decodable> {
   private var baseUrl: String
   
-  init(baseUrl: String) {
-    self.baseUrl = baseUrl
+  init() {
+    self.baseUrl = "https://vortigo.blob.core.windows.net/files/pokemon/data"
   }
   
-  func load(path: String, method: RequestMethod, params: [String: Any], completion: @escaping (Any?, ServiceError?) -> ()) -> URLSessionDataTask? {
+  func load(path: String, completion: @escaping (T?, ServiceError?) -> ()) -> URLSessionDataTask? {
 
     if !Reachability.isConnectedToNetwork() {
       completion(nil, ServiceError.noConnection)
       return nil
     }
     
-    let request = URLRequest(baseUrl: baseUrl, path: path, method: method, params: params)
-    
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-
-      var object: Any? = nil
-      if let data = data {
-        object = try? JSONSerialization.jsonObject(with: data, options: [])
+    if let url = URL(string: baseUrl + path) {
+      let session = URLSession(configuration: .default)
+      let task = session.dataTask(with: url) { data, response, error in
+        if error != nil {
+          print(error!)
+          return
+        }
+        
+        var object: T? = nil
+        if let data = data {
+          object = try? JSONDecoder().decode(T.self, from: data)
+        }
+        
+        if let httpResponse = response as? HTTPURLResponse, (200..<300) ~= httpResponse.statusCode {
+          completion(object, nil)
+        } else {
+          let error = (object as? [String: Any]).flatMap(ServiceError.init) ?? ServiceError.unexpected
+          completion(nil, error)
+        }
       }
-      
-      if let httpResponse = response as? HTTPURLResponse, (200..<300) ~= httpResponse.statusCode {
-        completion(object, nil)
-      } else {
-        let error = (object as? [String: Any]).flatMap(ServiceError.init) ?? ServiceError.unexpected
-        completion(nil, error)
-      }
+      task.resume()
+      return task
     }
-    
-    task.resume()
-    
-    return task
+    return nil
   }
 }

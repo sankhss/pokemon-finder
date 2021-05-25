@@ -10,16 +10,12 @@ import Foundation
 struct Type {
   var name: String?
   var image: String?
+  var selected: Bool = false
 }
 
 extension Type {
-  init?(json: [String: Any]) {
-    guard let name = json["name"] as? String else {
-      return nil
-    }
-    
-    self.name = name
-    self.image = json["email"] as? String
-    self.name = json["thumbnailImage"] as? String
+  init(data: TypeData) {
+    self.name = data.name
+    self.image = data.thumbnailImage
   }
 }
