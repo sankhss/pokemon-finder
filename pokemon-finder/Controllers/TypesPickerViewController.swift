@@ -10,6 +10,7 @@ import UIKit
 class TypesPickerViewController: UIViewController, TypeListManagerDelegate {
   
   @IBOutlet weak var typeSelectionTableView: UITableView!
+  @IBOutlet weak var confirmButton: UIButton!
   
   var typeListManager = TypeListManager()
   var types: [Type] = []
@@ -22,6 +23,8 @@ class TypesPickerViewController: UIViewController, TypeListManagerDelegate {
     setDelegates()
     
     types = typeListManager.types
+    confirmButton.isEnabled = false
+    confirmButton.backgroundColor = .lightGray
   }
   
   func didUpdateTypeList(_ typeListManager: TypeListManager, typeList: [Type]) {
@@ -95,5 +98,7 @@ extension TypesPickerViewController: UITableViewDelegate, UITableViewDataSource 
     typeListManager.unselectAllTypes()
     types[indexPath.row].selected = true
     pickedType = types[indexPath.row]
+    confirmButton.isEnabled = true
+    confirmButton.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.1174988821, blue: 0.4629961252, alpha: 1)
   }
 }

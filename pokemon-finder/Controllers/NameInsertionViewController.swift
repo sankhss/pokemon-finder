@@ -40,6 +40,8 @@ class NameInsertionViewController: UIViewController, UITextFieldDelegate {
   func textFieldDidEndEditing(_ textField: UITextField) {
     if textField.text != "" {
       submitButton.isHidden = false
+    } else {
+      submitButton.isHidden = true
     }
   }
   

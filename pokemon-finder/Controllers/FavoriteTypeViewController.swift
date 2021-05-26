@@ -11,6 +11,7 @@ class FavoriteTypeViewController: UIViewController {
   
   @IBOutlet weak var typeInputTextField: UITextField!
   @IBOutlet weak var greetingLabel: UILabel!
+  @IBOutlet weak var submitButton: UIButton!
   
   var trainerName: String?
   
@@ -25,6 +26,8 @@ class FavoriteTypeViewController: UIViewController {
     
     typeInputTextField.isUnderlinedField()
     typeInputTextField.addTarget(self, action: #selector(presentTypesModal), for: .touchDown)
+    
+    submitButton.isHidden = true
   }
   
   @IBAction func selectTypeButtonPressed(_ sender: UIButton) {
@@ -37,10 +40,11 @@ class FavoriteTypeViewController: UIViewController {
   
   func updateValue() {
     typeInputTextField.text = favoriteType?.name?.capitalized
+    
+    submitButton.isHidden = false
   }
   
   @IBAction func submitButtonPressed(_ sender: UIButton) {
-    
     performSegue(withIdentifier: "showPokemonList", sender: self)
   }
   

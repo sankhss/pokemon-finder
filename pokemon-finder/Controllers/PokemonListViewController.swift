@@ -16,6 +16,7 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
   @IBOutlet weak var searchTextField: UITextField!
   @IBOutlet weak var typesCollectionView: UICollectionView!
   @IBOutlet weak var pokemonTableView: UITableView!
+  @IBOutlet weak var sortByNameButton: UIButton!
   
   var typeListManager = TypeListManager()
   var types: [Type] = []
@@ -56,8 +57,7 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
     }
   }
   
-  func updateTypesCollection() {
-    typesCollectionView.reloadData()
+  @IBAction func sortByNameButtonPressed(_ sender: UIButton) {
   }
   
   func setDelegates() {

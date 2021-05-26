@@ -311,6 +311,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="confirmButton" destination="ngL-Dd-j0V" id="71L-tH-04Z"/>
                         <outlet property="typeSelectionTableView" destination="TJK-jH-d3D" id="mZR-wh-DwK"/>
                     </connections>
                 </viewController>
@@ -403,6 +404,7 @@
                     <navigationItem key="navigationItem" id="b6g-OY-1yY"/>
                     <connections>
                         <outlet property="greetingLabel" destination="RYE-88-CqI" id="fPU-AM-0fC"/>
+                        <outlet property="submitButton" destination="ngN-vt-Y5w" id="lkw-O5-HxC"/>
                         <outlet property="typeInputTextField" destination="ALv-C3-MzT" id="Mk3-Vc-1F4"/>
                         <segue destination="rNY-Q6-kky" kind="presentation" identifier="presentTypesModal" id="omG-sg-l87"/>
                         <segue destination="9aT-4q-WWR" kind="show" identifier="showPokemonList" id="jh1-TG-Qzn"/>
@@ -550,6 +552,9 @@
                                                 <state key="normal" title="Name">
                                                     <color key="titleColor" systemColor="systemGrayColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sortByNameButtonPressed:" destination="9aT-4q-WWR" eventType="touchUpInside" id="kqH-2r-RjQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -618,6 +623,7 @@
                         <outlet property="pokemonTableView" destination="fU6-ad-b9t" id="Dd6-LU-hJc"/>
                         <outlet property="searchButton" destination="NLG-Tf-7aE" id="Sjw-Qe-Zx0"/>
                         <outlet property="searchTextField" destination="5n7-K0-au2" id="4YJ-Ac-GEN"/>
+                        <outlet property="sortByNameButton" destination="CS4-7d-Pej" id="M8t-Qk-SWr"/>
                         <outlet property="typesCollectionView" destination="efs-dW-F5Z" id="qeF-Bh-pOd"/>
                     </connections>
                 </viewController>
