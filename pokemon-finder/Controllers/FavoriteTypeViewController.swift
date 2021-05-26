@@ -39,10 +39,10 @@ class FavoriteTypeViewController: UIViewController {
     performSegue(withIdentifier: "showPokemonList", sender: self)
   }
   
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    segue.destination.modalPresentationStyle = .fullScreen
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showPokemonList" {
+      segue.destination.modalPresentationStyle = .fullScreen
+      (segue.destination as! PokemonListViewController).favoriteType = favoriteType
+    }
+  }
 }

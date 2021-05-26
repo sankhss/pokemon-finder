@@ -7,23 +7,122 @@
 
 import UIKit
 
-class PokemonListViewController: UIViewController {
+class PokemonListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+  
+  @IBOutlet weak var headerTitleLabel: UILabel!
+  @IBOutlet weak var searchButton: UIButton!
+  @IBOutlet weak var typesCollectionView: UICollectionView!
+  @IBOutlet weak var pokemonTableView: UITableView!
+  
+  var pokemons: [Pokemon] = []
+  var pokemonsByType: [Pokemon] = []
+  
+  var types: [Type] = []
+  var favoriteType: Type?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  var typesTask: URLSessionDataTask!
+  var pokemonTask: URLSessionDataTask!
+  
+  var pickedType: Type?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    typesCollectionView.delegate = self
+    typesCollectionView.dataSource = self
+    
+    pokemonTableView.delegate = self
+    pokemonTableView.dataSource = self
+    
+    updateTypes()
+    updatePokemons()
+  }
+  
+  func updateTypes() {
+    typesTask?.cancel()
+    typesTask = TypeService().load() {[weak self] types, error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print(error.localizedDescription)
+        } else if let types = types {
+          self?.types = types
+          self?.updateTypesCollection()
+        }
+      }
+    }
+  }
+  
+  func updatePokemons() {
+    pokemonTask?.cancel()
+    pokemonTask = PokemonService().load() {[weak self] pokemons, error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print(error.localizedDescription)
+        } else if let pokemons = pokemons {
+          self?.pokemons = pokemons
+          if let favorite = self?.favoriteType {
+            self?.filterWith(type: favorite)
+          }
+          self?.updatePokemonsList()
+        }
+      }
+    }
+  }
+  
+  @IBAction func searchButtonPressed(_ sender: UIButton) {
+    
+  }
+  
+  func updateTypesCollection() {
+    typesCollectionView.reloadData()
+  }
+  
+  func updatePokemonsList() {
+    pokemonTableView.reloadData()
+  }
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return pokemonsByType.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonTableViewCell
+    cell.selectionStyle = .none
+    
+    let pokemon = pokemonsByType[indexPath.row]
+    cell.pokemonImageView?.load(from: pokemon.image!)
+    cell.pokemonNameLabel.text = pokemon.name?.capitalized
+   
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return types.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typeCollectionCell", for: indexPath) as! TypeCollectionViewCell
+    
+    let type = types[indexPath.row]
+    cell.typeImageView?.load(from: type.image!)
+    cell.typeNameLabel.text = type.name?.capitalized
+    
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    filterWith(type: types[indexPath.row])
+  }
+  
+  func filterWith(type: Type) {
+    pokemonsByType = pokemons.filter { pokemon in
+      return pokemon.type?.contains(type.name!) ?? false
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    updatePokemonsList()
+  }
 }

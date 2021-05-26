@@ -11,16 +11,14 @@ struct Pokemon {
   var id: Int
   var name: String?
   var image: String?
+  var type: [String]?
 }
 
 extension Pokemon {
-  init?(_ json: [String: Any]) {
-    guard let id = json["id"] as? Int else {
-      return nil
-    }
-    
-    self.id = id
-    self.name = json["name"] as? String
-    self.image = json["thumbnailImage"] as? String
+  init(data: PokemonData) {
+    self.id = data.id
+    self.name = data.name
+    self.image = data.thumbnailImage
+    self.type = data.type
   }
 }
