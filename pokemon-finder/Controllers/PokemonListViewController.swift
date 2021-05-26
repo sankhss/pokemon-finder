@@ -70,7 +70,7 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
       sortType = .descendingName
       sortByNameButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
     } else {
-      sortType = .ascendingNumber
+      sortType = .ascendingName
       sortByNameButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
     }
     
