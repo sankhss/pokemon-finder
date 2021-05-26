@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PokemonListViewController: UIViewController {
+class PokemonListViewController: UIViewController, PokemonListManagerDelegate, TypeListManagerDelegate {
+  
+  var favoriteType: Type?
   
   @IBOutlet weak var headerTitleLabel: UILabel!
   @IBOutlet weak var searchButton: UIButton!
@@ -15,59 +17,29 @@ class PokemonListViewController: UIViewController {
   @IBOutlet weak var typesCollectionView: UICollectionView!
   @IBOutlet weak var pokemonTableView: UITableView!
   
-  var pokemons: [Pokemon] = []
-  var pokemonsByType: [Pokemon] = []
-  
+  var typeListManager = TypeListManager()
   var types: [Type] = []
-  var favoriteType: Type?
-
-  var typesTask: URLSessionDataTask!
-  var pokemonTask: URLSessionDataTask!
+  
+  var pokemonListManager = PokemonListManager()
+  var pokemons: [Pokemon] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    typesCollectionView.delegate = self
-    typesCollectionView.dataSource = self
+    setDelegates()
     
-    pokemonTableView.delegate = self
-    pokemonTableView.dataSource = self
-    
-    searchTextField.delegate = self
-    
-    updateTypes()
-    updatePokemons()
+    types = typeListManager.types
+    pokemonListManager.loadWithFavorite(type: favoriteType)
   }
   
-  func updateTypes() {
-    typesTask?.cancel()
-    typesTask = TypeService().load() {[weak self] types, error in
-      DispatchQueue.main.async {
-        if let error = error {
-          print(error.localizedDescription)
-        } else if let types = types {
-          self?.types = types
-          self?.updateTypesCollection()
-        }
-      }
-    }
+  func didUpdatePokemonList(_ pokemonListManager: PokemonListManager, pokemonList: [Pokemon]) {
+    pokemons = pokemonList
+    pokemonTableView.reloadData()
   }
   
-  func updatePokemons() {
-    pokemonTask?.cancel()
-    pokemonTask = PokemonService().load() {[weak self] pokemons, error in
-      DispatchQueue.main.async {
-        if let error = error {
-          print(error.localizedDescription)
-        } else if let pokemons = pokemons {
-          self?.pokemons = pokemons.unique
-          if let favorite = self?.favoriteType {
-            self?.filterWith(type: favorite)
-          }
-          self?.updatePokemonsList()
-        }
-      }
-    }
+  func didUpdateTypeList(_ typeListManager: TypeListManager, typeList: [Type]) {
+    types = typeList
+    typesCollectionView.reloadData()
   }
   
   @IBAction func searchButtonPressed(_ sender: UIButton) {
@@ -88,24 +60,17 @@ class PokemonListViewController: UIViewController {
     typesCollectionView.reloadData()
   }
   
-  func updatePokemonsList() {
-    pokemonTableView.reloadData()
-  }
-  
-  func filterWith(type: Type) {
-    pokemonsByType = pokemons.filter { pokemon in
-      return pokemon.type?.contains(type.name!) ?? false
-    }
+  func setDelegates() {
+    pokemonListManager.delegate = self
+    typeListManager.delegate = self
     
-    updatePokemonsList()
-  }
-  
-  func filterWith(name: String) {
-    pokemonsByType = pokemons.filter { pokemon in
-      return pokemon.name?.hasPrefix(name) ?? false
-    }
+    typesCollectionView.delegate = self
+    typesCollectionView.dataSource = self
     
-    updatePokemonsList()
+    pokemonTableView.delegate = self
+    pokemonTableView.dataSource = self
+    
+    searchTextField.delegate = self
   }
 }
 
@@ -128,7 +93,7 @@ extension PokemonListViewController: UICollectionViewDelegate, UICollectionViewD
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    filterWith(type: types[indexPath.row])
+    pokemonListManager.filterWith(type: types[indexPath.row])
   }
 }
 
@@ -141,14 +106,14 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return pokemonsByType.count
+    return pokemons.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonTableViewCell
     cell.selectionStyle = .none
     
-    let pokemon = pokemonsByType[indexPath.row]
+    let pokemon = pokemons[indexPath.row]
     cell.pokemonImageView?.load(from: pokemon.image!)
     cell.pokemonNameLabel.text = pokemon.name?.capitalized
    
@@ -170,11 +135,7 @@ extension PokemonListViewController: UITextFieldDelegate {
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    if let name = textField.text {
-      filterWith(name: name)
-    } else {
-      filterWith(type: favoriteType!)
-    }
+    searchFrom(textField: textField)
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -182,10 +143,14 @@ extension PokemonListViewController: UITextFieldDelegate {
   }
   
   @IBAction func searchTextChanged(_ sender: UITextField) {
-    if let name = sender.text {
-      filterWith(name: name)
+    searchFrom(textField: sender)
+  }
+  
+  func searchFrom(textField: UITextField) {
+    if let name = textField.text {
+      pokemonListManager.filterWith(name: name)
     } else {
-      filterWith(type: favoriteType!)
+      pokemonListManager.filterWith(type: favoriteType!)
     }
   }
 }

@@ -7,41 +7,51 @@
 
 import UIKit
 
-class TypesPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TypesPickerViewController: UIViewController, TypeListManagerDelegate {
   
   @IBOutlet weak var typeSelectionTableView: UITableView!
   
+  var typeListManager = TypeListManager()
   var types: [Type] = []
-  var task: URLSessionDataTask!
   
   var pickedType: Type?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    typeSelectionTableView.delegate = self
-    typeSelectionTableView.dataSource = self
+    setDelegates()
     
-    task?.cancel()
-    task = TypeService().load() {[weak self] types, error in
-      DispatchQueue.main.async { 
-        if let error = error {
-          print(error.localizedDescription)
-        } else if let types = types {
-          self?.types = types
-          self?.updateUI()
-        }
-      }
-    }
+    types = typeListManager.types
   }
   
-  func updateUI() {
+  func didUpdateTypeList(_ typeListManager: TypeListManager, typeList: [Type]) {
+    types = typeList
     typeSelectionTableView.reloadData()
   }
   
   @IBAction func closeModalButtonPressed(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
+  
+  func setDelegates() {
+    typeListManager.delegate = self
+    
+    typeSelectionTableView.delegate = self
+    typeSelectionTableView.dataSource = self
+  }
+  
+  @IBAction func confirmButtonPressed(_ sender: UIButton) {
+    if let presenter = presentingViewController as? FavoriteTypeViewController {
+      presenter.favoriteType = pickedType
+      presenter.updateValue()
+    }
+    dismiss(animated: true, completion: nil)
+  }
+}
+
+//MARK: - UITableView section
+
+extension TypesPickerViewController: UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
@@ -66,16 +76,14 @@ class TypesPickerViewController: UIViewController, UITableViewDelegate, UITableV
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "typeCell", for: indexPath) as! TypeTableViewCell
+    cell.selectionStyle = .none
     
     let type = types[indexPath.row]
     cell.imageView?.load(from: type.image!)
     cell.typeNameLabel.text = type.name?.capitalized
     cell.typeIsSelectedButton.isEnabled = false
-    if type.selected {
-      cell.typeIsSelectedButton.setImage(UIImage(named: "radio-on"), for: .normal)
-    } else {
-      cell.typeIsSelectedButton.setImage(UIImage(named: "radio-off"), for: .normal)
-    }
+    cell.typeIsSelectedButton.setImage(type.getIconSelection, for: .normal)
+    
     return cell
   }
   
@@ -84,24 +92,8 @@ class TypesPickerViewController: UIViewController, UITableViewDelegate, UITableV
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    unselectAllTypes()
+    typeListManager.unselectAllTypes()
     types[indexPath.row].selected = true
     pickedType = types[indexPath.row]
-    updateUI()
-  }
-  
-  func unselectAllTypes() {
-    for i in 0..<types.count {
-      types[i].selected = false
-    }
-  }
-  
-  
-  @IBAction func confirmButtonPressed(_ sender: UIButton) {
-    if let presenter = presentingViewController as? FavoriteTypeViewController {
-      presenter.favoriteType = pickedType
-      presenter.updateValue()
-    }
-    dismiss(animated: true, completion: nil)
   }
 }

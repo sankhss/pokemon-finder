@@ -5,16 +5,7 @@
 //  Created by Samuel Henrique on 5/21/21.
 //
 
-import UIKit
-
-
-enum RequestMethod: String {
-  case get = "GET"
-  case post = "POST"
-  case put = "PUT"
-  case delete = "DELETE"
-}
-
+import Foundation
 
 final class HttpClient<T: Decodable> {
   private var baseUrl: String
