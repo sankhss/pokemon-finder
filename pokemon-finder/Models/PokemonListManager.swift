@@ -52,4 +52,17 @@ class PokemonListManager {
     delegate?.didUpdatePokemonList(self, pokemonList: filtered)
   }
   
+  func sort(_ list:[Pokemon], type: SortType) {
+    var sorted = list
+    if type == .ascendingName {
+      sorted = list.sorted { $0.name!.lowercased() < $1.name!.lowercased() }
+    } else if type == .descendingName {
+      sorted = list.sorted { $0.name!.lowercased() > $1.name!.lowercased() }
+    } else if type == .ascendingNumber {
+      sorted = list.sorted { $0.id < $1.id }
+    } else {
+      sorted = list.sorted { $0.id > $1.id }
+    }
+    delegate?.didUpdatePokemonList(self, pokemonList: sorted)
+  }
 }

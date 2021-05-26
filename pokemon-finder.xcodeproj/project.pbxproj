@@ -34,6 +34,7 @@
 		D1E36C71265DCFA100C7DB9B /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E36C70265DCFA100C7DB9B /* ArrayExtension.swift */; };
 		D1E36C73265DF89D00C7DB9B /* PokemonListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E36C72265DF89D00C7DB9B /* PokemonListManager.swift */; };
 		D1E36C75265E030B00C7DB9B /* TypeListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E36C74265E030A00C7DB9B /* TypeListManager.swift */; };
+		D1E36C77265E135E00C7DB9B /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E36C76265E135E00C7DB9B /* SortType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		D1E36C70265DCFA100C7DB9B /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		D1E36C72265DF89D00C7DB9B /* PokemonListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListManager.swift; sourceTree = "<group>"; };
 		D1E36C74265E030A00C7DB9B /* TypeListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeListManager.swift; sourceTree = "<group>"; };
+		D1E36C76265E135E00C7DB9B /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				D1E36C70265DCFA100C7DB9B /* ArrayExtension.swift */,
+				D1E36C76265E135E00C7DB9B /* SortType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				D1E36C55265BF43F00C7DB9B /* Type.swift in Sources */,
 				D1E36C44265BF00800C7DB9B /* HttpClient.swift in Sources */,
 				D1E36C73265DF89D00C7DB9B /* PokemonListManager.swift in Sources */,
+				D1E36C77265E135E00C7DB9B /* SortType.swift in Sources */,
 				D17D5C962656E155000B6E05 /* NameInsertionViewController.swift in Sources */,
 				D17D5C822656B442000B6E05 /* AppDelegate.swift in Sources */,
 				D1E36C71265DCFA100C7DB9B /* ArrayExtension.swift in Sources */,

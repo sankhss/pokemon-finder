@@ -18,6 +18,8 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
   @IBOutlet weak var pokemonTableView: UITableView!
   @IBOutlet weak var sortByNameButton: UIButton!
   
+  var sortType: SortType = .ascendingNumber
+  
   var typeListManager = TypeListManager()
   var types: [Type] = []
   
@@ -31,6 +33,8 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
     
     types = typeListManager.types
     pokemonListManager.loadWithFavorite(type: favoriteType)
+    
+    sortByNameButton.semanticContentAttribute = .forceRightToLeft
   }
   
   func didUpdatePokemonList(_ pokemonListManager: PokemonListManager, pokemonList: [Pokemon]) {
@@ -58,6 +62,19 @@ class PokemonListViewController: UIViewController, PokemonListManagerDelegate, T
   }
   
   @IBAction func sortByNameButtonPressed(_ sender: UIButton) {
+    toggleSort()
+  }
+  
+  func toggleSort() {
+    if sortType == .ascendingName {
+      sortType = .descendingName
+      sortByNameButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+    } else {
+      sortType = .ascendingNumber
+      sortByNameButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+    }
+    
+    pokemonListManager.sort(pokemons, type: sortType)
   }
   
   func setDelegates() {
