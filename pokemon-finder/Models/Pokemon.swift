@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Pokemon {
+struct Pokemon: Equatable {
   var id: Int
   var name: String?
   var image: String?
   var type: [String]?
+  
+  static func ==(lhs: Pokemon, rhs: Pokemon) -> Bool {
+      return lhs.id == rhs.id
+  }
 }
 
 extension Pokemon {

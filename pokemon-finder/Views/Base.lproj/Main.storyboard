@@ -101,8 +101,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jhP-MM-tUv">
-                                <rect key="frame" x="23" y="386" width="368.5" height="70"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jhP-MM-tUv">
+                                <rect key="frame" x="23" y="376" width="368.5" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First we need to know your name..." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLR-8H-ayB">
                                         <rect key="frame" x="0.0" y="0.0" width="368.5" height="30"/>
@@ -111,7 +111,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xc7-GC-CgT">
-                                        <rect key="frame" x="0.0" y="30" width="368.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="50" width="368.5" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="gcx-xF-8KB"/>
                                         </constraints>
@@ -335,8 +335,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="reb-Oc-pHL">
-                                <rect key="frame" x="20" y="371" width="374" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="reb-Oc-pHL">
+                                <rect key="frame" x="20" y="361" width="374" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...Now tell us witch is your favorite Pokémon type:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRH-vU-rig">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
@@ -345,7 +345,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu4-2A-ZZ8">
-                                        <rect key="frame" x="0.0" y="60" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="80" width="374" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ALv-C3-MzT">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -448,13 +448,27 @@
                                                     <action selector="searchButtonPressed:" destination="9aT-4q-WWR" eventType="touchUpInside" id="yc5-e5-ICc"/>
                                                 </connections>
                                             </button>
+                                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5n7-K0-au2">
+                                                <rect key="frame" x="8" y="22" width="398" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="PwZ-en-2y2"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <connections>
+                                                    <action selector="searchTextChanged:" destination="9aT-4q-WWR" eventType="editingChanged" id="Hsf-65-mkQ"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.095605544749999993" green="0.78016394379999998" blue="0.63362717629999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="5n7-K0-au2" secondAttribute="bottom" constant="8" id="2EQ-kZ-RE1"/>
                                             <constraint firstAttribute="trailing" secondItem="NLG-Tf-7aE" secondAttribute="trailing" constant="20" id="3xX-GM-66Z"/>
                                             <constraint firstAttribute="height" constant="70" id="LgR-Kp-te9"/>
                                             <constraint firstItem="nLY-Vs-JED" firstAttribute="centerX" secondItem="9us-aW-TEY" secondAttribute="centerX" id="c8p-NC-kjR"/>
+                                            <constraint firstAttribute="trailing" secondItem="5n7-K0-au2" secondAttribute="trailing" constant="8" id="ect-3T-rFN"/>
                                             <constraint firstAttribute="bottom" secondItem="nLY-Vs-JED" secondAttribute="bottom" constant="8" id="h6o-RF-Ugm"/>
+                                            <constraint firstItem="5n7-K0-au2" firstAttribute="leading" secondItem="9us-aW-TEY" secondAttribute="leading" constant="8" id="rKf-kr-ogZ"/>
                                             <constraint firstAttribute="bottom" secondItem="NLG-Tf-7aE" secondAttribute="bottom" constant="8" id="vTp-WV-zkL"/>
                                         </constraints>
                                     </view>
@@ -603,6 +617,7 @@
                         <outlet property="headerTitleLabel" destination="nLY-Vs-JED" id="oJt-RH-4vG"/>
                         <outlet property="pokemonTableView" destination="fU6-ad-b9t" id="Dd6-LU-hJc"/>
                         <outlet property="searchButton" destination="NLG-Tf-7aE" id="Sjw-Qe-Zx0"/>
+                        <outlet property="searchTextField" destination="5n7-K0-au2" id="4YJ-Ac-GEN"/>
                         <outlet property="typesCollectionView" destination="efs-dW-F5Z" id="qeF-Bh-pOd"/>
                     </connections>
                 </viewController>

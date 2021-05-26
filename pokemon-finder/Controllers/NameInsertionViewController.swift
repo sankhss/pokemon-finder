@@ -16,6 +16,10 @@ class NameInsertionViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     
     nameInputTextField.isUnderlinedField()
+    nameInputTextField.keyboardType = .namePhonePad
+    nameInputTextField.autocapitalizationType = .words
+    nameInputTextField.autocorrectionType = .no
+    nameInputTextField.becomeFirstResponder()
     
     nameInputTextField.delegate = self
     submitButton.isHidden = true

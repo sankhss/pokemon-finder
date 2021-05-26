@@ -24,9 +24,14 @@ class FavoriteTypeViewController: UIViewController {
     }
     
     typeInputTextField.isUnderlinedField()
+    typeInputTextField.addTarget(self, action: #selector(presentTypesModal), for: .touchDown)
   }
   
   @IBAction func selectTypeButtonPressed(_ sender: UIButton) {
+    presentTypesModal()
+  }
+  
+  @objc func presentTypesModal() {
     performSegue(withIdentifier: "presentTypesModal", sender: self)
   }
   
