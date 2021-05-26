@@ -10,6 +10,7 @@ import UIKit
 class FavoriteTypeViewController: UIViewController {
   
   @IBOutlet weak var typeInputTextField: UITextField!
+  @IBOutlet weak var typeInputView: UIView!
   @IBOutlet weak var greetingLabel: UILabel!
   @IBOutlet weak var submitButton: UIButton!
   
@@ -25,7 +26,7 @@ class FavoriteTypeViewController: UIViewController {
     }
     
     typeInputTextField.isUnderlinedField()
-    typeInputTextField.addTarget(self, action: #selector(presentTypesModal), for: .touchDown)
+    typeInputView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTypesModal)))
     
     submitButton.isHidden = true
   }

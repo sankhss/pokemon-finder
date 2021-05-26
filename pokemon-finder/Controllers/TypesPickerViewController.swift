@@ -65,12 +65,9 @@ extension TypesPickerViewController: UITableViewDelegate, UITableViewDataSource 
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = UIView()
-    if let headerCell = tableView.dequeueReusableCell(withIdentifier: "typesHeaderCell") {
-      headerView.backgroundColor = .white
-      headerView.addSubview(headerCell)
-    }
-    return headerView
+    let headerCell = tableView.dequeueReusableCell(withIdentifier: "typesHeaderCell")
+    headerCell?.backgroundColor = .white
+    return headerCell
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +79,7 @@ extension TypesPickerViewController: UITableViewDelegate, UITableViewDataSource 
     cell.selectionStyle = .none
     
     let type = types[indexPath.row]
-    cell.imageView?.load(from: type.image!)
+    cell.typeImageView?.load(from: type.image!)
     cell.typeNameLabel.text = type.name?.capitalized
     cell.typeIsSelectedButton.isEnabled = false
     cell.typeIsSelectedButton.setImage(type.getIconSelection, for: .normal)

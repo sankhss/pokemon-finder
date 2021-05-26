@@ -173,21 +173,25 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="515"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typesHeaderCell" rowHeight="90" id="bLj-Xo-7Uw">
-                                                        <rect key="frame" x="0.0" y="24.5" width="404" height="90"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typesHeaderCell" rowHeight="70" id="bLj-Xo-7Uw">
+                                                        <rect key="frame" x="0.0" y="24.5" width="404" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="typesHeaderCell" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bLj-Xo-7Uw" id="eh1-MX-j3I">
-                                                            <rect key="frame" x="0.0" y="0.0" width="404" height="90"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="404" height="70"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your favorite pokémon type" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sge-Uq-VCA">
-                                                                    <rect key="frame" x="30" y="33.5" width="288.5" height="23"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your favorite pokémon type" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sge-Uq-VCA">
+                                                                    <rect key="frame" x="28" y="19" width="311" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT3-CX-k07">
-                                                                    <rect key="frame" x="340" y="33" width="24" height="24"/>
+                                                                    <rect key="frame" x="359" y="19" width="25" height="25"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="25" id="SRp-Mr-naC"/>
+                                                                        <constraint firstAttribute="width" constant="25" id="Xr4-tq-IDP"/>
+                                                                    </constraints>
                                                                     <state key="normal" image="close"/>
                                                                     <connections>
                                                                         <action selector="closeModalButtonPressed:" destination="rNY-Q6-kky" eventType="touchUpInside" id="GNO-Py-LTp"/>
@@ -195,16 +199,16 @@
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="KT3-CX-k07" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sge-Uq-VCA" secondAttribute="trailing" constant="20" id="KU5-tl-sGu"/>
-                                                                <constraint firstItem="sge-Uq-VCA" firstAttribute="leading" secondItem="eh1-MX-j3I" secondAttribute="leadingMargin" constant="10" id="SWF-uN-IC3"/>
-                                                                <constraint firstAttribute="trailing" secondItem="KT3-CX-k07" secondAttribute="trailing" constant="40" id="d72-Bq-OPs"/>
-                                                                <constraint firstItem="KT3-CX-k07" firstAttribute="centerY" secondItem="eh1-MX-j3I" secondAttribute="centerY" id="npY-GL-01f"/>
-                                                                <constraint firstItem="sge-Uq-VCA" firstAttribute="centerY" secondItem="eh1-MX-j3I" secondAttribute="centerY" id="s0P-by-FV5"/>
+                                                                <constraint firstItem="sge-Uq-VCA" firstAttribute="top" secondItem="eh1-MX-j3I" secondAttribute="topMargin" constant="8" id="3U8-Mh-rxc"/>
+                                                                <constraint firstItem="KT3-CX-k07" firstAttribute="top" secondItem="eh1-MX-j3I" secondAttribute="topMargin" constant="8" id="ETA-wh-lbW"/>
+                                                                <constraint firstItem="sge-Uq-VCA" firstAttribute="leading" secondItem="eh1-MX-j3I" secondAttribute="leadingMargin" constant="8" id="SWF-uN-IC3"/>
+                                                                <constraint firstItem="KT3-CX-k07" firstAttribute="leading" secondItem="sge-Uq-VCA" secondAttribute="trailing" constant="20" id="UpX-ZY-XWH"/>
+                                                                <constraint firstAttribute="trailing" secondItem="KT3-CX-k07" secondAttribute="trailing" constant="20" id="d72-Bq-OPs"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeCell" rowHeight="70" id="CdW-rm-pkp" customClass="TypeTableViewCell" customModule="pokemon_finder" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="114.5" width="404" height="70"/>
+                                                        <rect key="frame" x="0.0" y="94.5" width="404" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CdW-rm-pkp" id="IGj-jW-5m2">
                                                             <rect key="frame" x="0.0" y="0.0" width="404" height="70"/>
@@ -346,15 +350,39 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gu4-2A-ZZ8">
                                         <rect key="frame" x="0.0" y="80" width="374" height="40"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ALv-C3-MzT">
+                                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcs-2g-Sun">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udw-rt-KJt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="LiN-rA-WIL"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ALv-C3-MzT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="RgO-GA-ead"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="RgO-GA-ead"/>
+                                                    <constraint firstAttribute="height" constant="40" id="12d-c7-Pty"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ALv-C3-MzT" secondAttribute="bottom" id="Cis-D0-qpq"/>
+                                                    <constraint firstItem="ALv-C3-MzT" firstAttribute="leading" secondItem="Rcs-2g-Sun" secondAttribute="leading" id="La7-av-PEh"/>
+                                                    <constraint firstItem="Udw-rt-KJt" firstAttribute="leading" secondItem="Rcs-2g-Sun" secondAttribute="leading" id="Oie-3j-z6j"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Udw-rt-KJt" secondAttribute="trailing" id="UA1-jg-2Yk"/>
+                                                    <constraint firstItem="Udw-rt-KJt" firstAttribute="top" secondItem="Rcs-2g-Sun" secondAttribute="top" id="UQo-nN-Wg0"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Udw-rt-KJt" secondAttribute="bottom" id="b7K-kc-nLk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ALv-C3-MzT" secondAttribute="trailing" id="h63-hD-Ogs"/>
+                                                    <constraint firstItem="ALv-C3-MzT" firstAttribute="top" secondItem="Rcs-2g-Sun" secondAttribute="top" id="yNo-ES-Fmz"/>
                                                 </constraints>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogy-eN-rly">
                                                 <rect key="frame" x="334" y="0.0" width="40" height="40"/>
                                                 <constraints>
@@ -404,6 +432,7 @@
                         <outlet property="greetingLabel" destination="RYE-88-CqI" id="fPU-AM-0fC"/>
                         <outlet property="submitButton" destination="ngN-vt-Y5w" id="lkw-O5-HxC"/>
                         <outlet property="typeInputTextField" destination="ALv-C3-MzT" id="Mk3-Vc-1F4"/>
+                        <outlet property="typeInputView" destination="Udw-rt-KJt" id="3YL-Xg-XSh"/>
                         <segue destination="rNY-Q6-kky" kind="presentation" identifier="presentTypesModal" id="omG-sg-l87"/>
                         <segue destination="9aT-4q-WWR" kind="show" identifier="showPokemonList" id="jh1-TG-Qzn"/>
                     </connections>
