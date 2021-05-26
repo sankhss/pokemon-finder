@@ -46,7 +46,7 @@ class PokemonListManager {
   
   func filterWith(name: String) {
     let filtered = PokemonListManager.pokemons.filter { pokemon in
-      return pokemon.name?.hasPrefix(name) ?? false
+      return pokemon.name?.lowercased().hasPrefix(name.lowercased()) ?? false
     }
     
     delegate?.didUpdatePokemonList(self, pokemonList: filtered)
